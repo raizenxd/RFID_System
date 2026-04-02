@@ -10,7 +10,7 @@ public class ConnectXamppSQL {
     // ---------- CONNECT ----------
     public static Connection conn() throws Exception {
         String databaseName = "rfid verification";
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/"+databaseName, "root", "solution99");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/"+databaseName, "root", "");
     }
     // =================== FLUENT INSERT ===================
     public static InsertBuilder Insert(String table) {

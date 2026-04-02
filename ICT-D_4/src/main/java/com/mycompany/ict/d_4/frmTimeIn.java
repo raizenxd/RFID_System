@@ -6,6 +6,10 @@ package com.mycompany.ict.d_4;
 
 import java.awt.event.KeyEvent;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -69,6 +73,7 @@ public class frmTimeIn extends javax.swing.JFrame {
             String capturedValue = txtAM.getText().trim();
             if (!capturedValue.isEmpty()) {
                 AttendanceService.processAttendance(capturedValue, "IN", this);
+                
             }
             txtAM.setText(""); // Clear the input field after processing
 
@@ -99,7 +104,6 @@ public class frmTimeIn extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new frmTimeIn().setVisible(true));
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField txtAM;

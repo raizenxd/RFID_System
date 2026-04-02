@@ -46,6 +46,9 @@ public class AttendanceService {
                 showTimedMessageDialog(owner, "Student record not found for RFID: " + rfid, "Not Found", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
+           showTimedMessageDialog(owner, "Recorderd: " + rfid, "Record Updatedx", JOptionPane.WARNING_MESSAGE);
+
 
             String firstname = student.getOrDefault("firstname", "");
             String lastname = student.getOrDefault("lastname", "");
@@ -77,7 +80,7 @@ public class AttendanceService {
                 logger.warning("Parent email is empty for RFID " + rfid);
             }
 
-            showTimedMessageDialog(owner, "Time-" + logType.toLowerCase() + " recorded and notification sent for " + studentName, "Success", JOptionPane.INFORMATION_MESSAGE);
+                showTimedMessageDialog(owner, "Time-" + logType.toLowerCase() + " recorded and notification sent for " + studentName, "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             logger.log(java.util.logging.Level.SEVERE, "Error processing RFID time-" + logType.toLowerCase(), ex);
             showTimedMessageDialog(owner, "Error processing time-" + logType.toLowerCase() + ": " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
