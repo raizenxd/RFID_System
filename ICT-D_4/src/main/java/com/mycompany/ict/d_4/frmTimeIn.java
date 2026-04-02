@@ -4,6 +4,9 @@
  */
 package com.mycompany.ict.d_4;
 
+import java.awt.event.KeyEvent;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author pc
@@ -11,6 +14,15 @@ package com.mycompany.ict.d_4;
 public class frmTimeIn extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmTimeIn.class.getName());
+
+    // TODO: Replace these with external config or secure storage before production
+    private static final String EMAIL_FROM = "devtrish129@gmail.com";
+    private static final String EMAIL_PASSWORD = "opna mwyy novk xaan"; // App password required if 2FA enabled
+    private static final String SCHOOL_NAME = "Your School Name";
+    private static final String SCHOOL_PHONE = "+63-912-345-6789";
+
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm a");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
      * Creates new form frmTimeIn
@@ -35,9 +47,13 @@ public class frmTimeIn extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtAM.addActionListener(this::txtAMActionPerformed);
+        txtAM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAMKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtAM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 350, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\pc\\Documents\\Group 4 Figma\\TimeIn.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 560));
 
@@ -47,6 +63,17 @@ public class frmTimeIn extends javax.swing.JFrame {
     private void txtAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAMActionPerformed
         
     }//GEN-LAST:event_txtAMActionPerformed
+
+    private void txtAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String capturedValue = txtAM.getText().trim();
+            if (!capturedValue.isEmpty()) {
+                AttendanceService.processAttendance(capturedValue, "IN", this);
+            }
+            txtAM.setText(""); // Clear the input field after processing
+
+        }
+    }//GEN-LAST:event_txtAMKeyPressed
 
     /**
      * @param args the command line arguments

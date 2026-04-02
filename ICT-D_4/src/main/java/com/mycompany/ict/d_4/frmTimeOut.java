@@ -4,6 +4,8 @@
  */
 package com.mycompany.ict.d_4;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author pc
@@ -35,9 +37,13 @@ public class frmTimeOut extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtPM.addActionListener(this::txtPMActionPerformed);
+        txtPM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPMKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 330, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\pc\\Documents\\Group 4 Figma\\TimeOut.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 3, 870, 600));
 
@@ -47,6 +53,17 @@ public class frmTimeOut extends javax.swing.JFrame {
     private void txtPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPMActionPerformed
+
+    private void txtPMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPMKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String capturedValue = txtPM.getText().trim();
+            if (!capturedValue.isEmpty()) {
+                AttendanceService.processAttendance(capturedValue, "OUT", this);
+                txtPM.setText(""); // Clear the input field after processing
+            }
+        }
+        
+    }//GEN-LAST:event_txtPMKeyPressed
 
     /**
      * @param args the command line arguments
@@ -68,6 +85,7 @@ public class frmTimeOut extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new frmTimeOut().setVisible(true));
